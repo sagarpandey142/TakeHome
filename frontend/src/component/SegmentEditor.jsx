@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 
 export default function SegmentEditor({ onEvaluate, loading }) {
-  const [text, setText] = useState('price > 1000\nstock_status = instock\non_sale = true');
+  const [text, setText] = useState('price > 100\nstock_status = instock\non_sale = true');
 
   const submit = () => {
     onEvaluate(text);
