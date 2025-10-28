@@ -95,7 +95,7 @@ Response Example:
   ]
 }
 
-🧑‍💻 Frontend Details
+- Frontend Details
 
 Built with React (Vite) and Axios for API integration.
 
