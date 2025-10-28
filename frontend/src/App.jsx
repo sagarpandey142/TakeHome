@@ -12,7 +12,8 @@ export default function App() {
   const [loading, setLoading] = useState(false);
 
   const fetchProducts = async () => {
-    const res = await axios.get(`${PRODUCTS_API}/products`);
+
+    const res = await axios.get(`${PRODUCTS_API}/products/`);
     setProducts(res.data);
   };
 
@@ -30,7 +31,7 @@ export default function App() {
 
   return (
     <div style={{ padding: 20, fontFamily: 'Arial, sans-serif' }}>
-      <h1>Products</h1>
+      <h1>Displaying first 8 products for better readability</h1>
       <div style={{ display: 'flex', gap: 12, flexWrap: 'wrap' }}>
         {products.slice(0,8).map(p => <ProductCard key={p.id} p={p} />)}
       </div>
