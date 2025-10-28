@@ -1,0 +1,86 @@
+ Full Stack Developer Take-Home Assignment
+
+This project is a containerized full-stack application consisting of a Product Service, a Segment Service, and a Frontend.
+It demonstrates API integration, periodic data ingestion from WooCommerce, MongoDB storage, and API visualization using Swagger.
+
+ Tech Stack
+
+Frontend: React
+
+Backend: Node.js, Express
+
+Database: MongoDB
+
+Containerization: Docker, Docker Compose
+
+API Docs: Swagger (OpenAPI)
+
+🚀 Quick Start
+1️⃣ Clone the repository
+git clone <your_repo_url>
+cd takehome
+
+2️⃣ Create .env files
+
+Copy the example files for each service:
+
+cp product-service/.env.example product-service/.env
+cp segment-service/.env.example segment-service/.env
+cp frontend/.env.example frontend/.env
+
+3️⃣ Run using Docker Compose
+docker compose up --build
+
+
+Once built, all services will start automatically.
+
+🌐 Service URLs
+Service	URL
+Frontend	http://localhost:3000
+
+Product Service	http://localhost:4000/products
+
+Segment Service	http://localhost:4100/segments/evaluate
+
+Swagger Docs (Product)	http://localhost:4000/docs
+
+Swagger Docs (Segment)	http://localhost:4100/docs
+🕐 Cron-based Product Ingestion
+
+The Product Service automatically fetches and updates products from the WooCommerce API periodically using a cron job (default: every 15 minutes).
+This ensures the database remains up-to-date without manual triggers.
+
+🧾 API Visualization (Swagger)
+
+All backend APIs are documented using Swagger (OpenAPI).
+Visit the /docs route of each backend service to view and test endpoints interactively.
+
+🧠 AI Usage Note
+
+Parts of this assignment (specifically code explanation, Swagger documentation setup, and README structure) were written with assistance from AI (ChatGPT) for clarity and formatting.
+All business logic, integration, and final implementation were manually written and verified.
+
+🧩 Folder Structure
+takehome/
+├── docker-compose.yml
+├── product-service/
+├── segment-service/
+└── frontend/
+
+🧪 Testing
+
+Use Swagger UI or Postman to test endpoints.
+
+Example request for segment evaluation:
+
+{
+  "rules": "price > 1000\nstock_status = instock\non_sale = true"
+}
+
+✅ Notes
+
+Default cron interval: */15 * * * * (every 15 minutes)
+
+All ports are configurable through .env files
+
+Ensure Docker Desktop or Docker Engine is running before execution

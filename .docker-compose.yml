@@ -1,0 +1,42 @@
+version: "3.8"
+services:
+  mongo:
+    image: mongo:6
+    restart: always
+    volumes:
+      - mongo-data:/data/db
+    ports:
+      - "27017:27017"
+
+  product-service:
+    build: ./product-service
+    env_file:
+      - ./product-service/.env.example
+    environment:
+      - MONGODB_URI=mongodb://mongo:27017/productsdb
+    depends_on:
+      - mongo
+    ports:
+      - "4000:4000"
+
+  segment-service:
+    build: ./segment-service
+    env_file:
+      - ./segment-service/.env.example
+    environment:
+      - PRODUCTS_SERVICE_URL=http://product-service:4000
+    depends_on:
+      - product-service
+    ports:
+      - "4100:4100"
+
+  frontend:
+    build: ./frontend
+    ports:
+      - "3000:3000"
+    depends_on:
+      - product-service
+      - segment-service
+
+volumes:
+  mongo-data:
