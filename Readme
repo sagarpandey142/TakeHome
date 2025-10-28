@@ -53,6 +53,57 @@ Swagger Docs (Segment)	http://localhost:4100/docs
 The Product Service automatically fetches and updates products from the WooCommerce API periodically using a cron job (default: every 15 minutes).
 This ensures the database remains up-to-date without manual triggers.
 
+Description of Ingestion Logic
+
+The ingestion logic is defined inside the Product Service.
+It periodically fetches data from an external API (WooCommerce) and stores it in MongoDB.
+This logic is managed using the node-cron scheduler and helps maintain an updated dataset without manual data entry.
+
+-  Sample Input for Segmentation
+
+Endpoint:
+
+POST /segments/evaluate
+
+
+Request Body:
+
+{
+  "rules": "price > 1000\nstock_status = instock\non_sale = true"
+}
+
+
+Response Example:
+
+{
+  "count": 2,
+  "results": [
+    {
+      "id": 101,
+      "name": "Laptop Pro X",
+      "price": 1500,
+      "stock_status": "instock",
+      "on_sale": true
+    },
+    {
+      "id": 102,
+      "name": "Smart TV 4K",
+      "price": 1200,
+      "stock_status": "instock",
+      "on_sale": true
+    }
+  ]
+}
+
+🧑‍💻 Frontend Details
+
+Built with React (Vite) and Axios for API integration.
+
+Displays the first 8 products (.slice(0,8)) for better readability.
+
+Allows rule-based segmentation evaluation directly via UI.
+
+
 - API Visualization (Swagger)
 
 All backend APIs are documented using Swagger (OpenAPI).
